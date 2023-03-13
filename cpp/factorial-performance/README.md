@@ -4,7 +4,7 @@ Bigest factorial input for "default" math lib is 22, as the result for 23 will b
 
 ## Results
 
-### Python only
+### Python 
 
 | Input | Recursive Time | Loop Time |
 | --- | --- | --- |
@@ -15,23 +15,27 @@ Bigest factorial input for "default" math lib is 22, as the result for 23 will b
 
 ### C++
 
-
-#### C++ v1 (with custom BigInt implementation)
-
-Compiling
+Compiling v1  (with custom BigInt implementation)
 > g++ -o factorial factorial.cpp
 
-C++ loop 
-5000 0.450s
-10000 2.177s
-50000 56.432s
+Compiling v2 (using GMP)
+> make
 
-#### C++ v2 (using GMP)
+Get factorial of 5 with:
+> ./program 5
 
-Compiling
-> g++ -o factorial -lgmp factorial.cpp
 
-C++ loop 
-5000 0.003s
-10000 0.010s
-50000 0.208s
+| Input | C++ v1 | C++ v2 |
+| --- | --- | --- |
+| 5000 | 0.450s | 0.0025s |
+| 10000 | 2.177s | 0.0097s |
+| 50000 | 56.432s | 0.2090s |
+
+
+### Python using C++
+
+| Input | Python using C++ | 
+| --- | --- | 
+| 5000 | 0.0022s |
+| 10000 | 0.0088s | 
+| 50000 | 0.2513s |
