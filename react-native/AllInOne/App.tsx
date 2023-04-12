@@ -24,7 +24,9 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import FadeIn from './src/components/FadeIn';
+import FadeIn from './src/components/animated/FadeIn';
+import SlideIn from './src/components/animated/SlideIn';
+import ComposedSlide from './src/components/animated/ComposedSlide';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -82,6 +84,8 @@ function App(): JSX.Element {
             screen and then come back to see your edits.
           </Section>
           <FadeIn />
+          <SlideIn />
+          <ComposedSlide />
         </View>
       </ScrollView>
     </SafeAreaView>
