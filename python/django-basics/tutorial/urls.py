@@ -26,7 +26,9 @@ router.register(r'groups', views.GroupViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('to-do/', views.ToDo.as_view()),
+    path('to-do/', views.ToDoView.as_view(), name='todo-list'),
+    path('to-do/<int:pk>/', views.ToDoView.as_view(), name='todo-detail'),  # Include a primary key for updating and deleting
+
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

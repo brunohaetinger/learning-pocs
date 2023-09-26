@@ -1,0 +1,9 @@
+<h1>To-Do List</h1>
+
+<ul>
+{% for todo in todos %}
+    <li>{{ todo.title }} - {{ todo.description }} - {{ todo.due_date }}</li>
+{% empty %}
+    <li>No To-Do items yet.</li>
+{% endfor %}
+</ul>

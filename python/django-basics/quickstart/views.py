@@ -2,8 +2,12 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from quickstart.serializers import UserSerializer, GroupSerializer
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views import View
+from django.views.generic import ListView
+from .models import ToDo
+from django.shortcuts import render, get_object_or_404
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -24,7 +28,29 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 # My Views
 
-class ToDo(View):
+class ToDoView(View):
+    template_name = 'todo_list.html'  # Template for listing ToDos
+
     def get(self, request):
-        # <view logic>
-        return HttpResponse("result")
+        todos = ToDo.objects.all()
+        return render(request, self.template_name, {'todos': todos})
+
+    def post(self, request):
+        form = ToDoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('todo-list'))  # Redirect to the list view
+        return render(request, self.template_name, {'form': form})
+
+    def put(self, request, pk):
+        todo = get_object_or_404(ToDo, pk=pk)
+        form = ToDoForm(request.PUT, instance=todo)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('todo-list'))
+        return render(request, self.template_name, {'form': form})
+
+    def delete(self, request, pk):
+        todo = get_object_or_404(ToDo, pk=pk)
+        todo.delete()
+        return HttpResponseRedirect(reverse('todo-list'))
