@@ -27,7 +27,10 @@ router.register(r'groups', views.GroupViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('to-do/', views.ToDoView.as_view(), name='todo-list'),
-    path('to-do/<int:pk>/', views.ToDoView.as_view(), name='todo-detail'),  # Include a primary key for updating and deleting
+    path('to-do/<int:pk>/', views.ToDoDetailView.as_view(), name='todo-detail'),  # Include a primary key for updating and deleting
+    path('to-do/create/', views.ToDoCreateView.as_view(), name='todo-create'),
+    path('to-do/update/<int:pk>', views.ToDoUpdateView.as_view(), name='todo-update'),
+    path('to-do/delete/<int:pk>', views.ToDoDeleteView.as_view(), name='todo-delete'),
 
     path('admin/', admin.site.urls),
     path('', include(router.urls)),

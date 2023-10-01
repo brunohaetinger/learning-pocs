@@ -1,1 +1,4 @@
 env/
+quickstart/__pycache__
+tutorial/__pycache__
+db.sqlite3

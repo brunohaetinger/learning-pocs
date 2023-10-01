@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit ToDo</title>
+    <style>
+      button{
+        background-color: green;
+        border-radius: 25px;
+        width: 80px;
+        color: white;
+      }
+    </style>
+</head>
+<body>
+    <h1>Edit ToDo</h1>
+    {% if error %}
+      <p style="color: red">Error creating</p>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>
