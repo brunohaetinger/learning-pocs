@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D3.js Bar Chart</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  
+  <style>
+    .candle {
+      stroke: black;
+    }
+    .up {
+      fill: green;
+      stroke: green;
+    }
+    .down {
+      fill: red;
+      stroke: red;
+    }
+  </style>
+
+</head>
+<body>
+  <h1>Simple bars</h1>
+  <div id="simple-bars"></div>
+  <h1>Candlesticks graph</h1>
+  <div id="candlesticks"></div>
+
+  <script>
+    // Sample data
+    const data = [30, 40, 20, 50, 10];
+
+    // Create an SVG container
+    const svg = d3.select("#simple-bars").append("svg")
+                .attr("width", 400)
+                .attr("height", 200);
+
+    // Create bars based on data
+    svg.selectAll("rect")
+      .data(data)
+      .enter().append("rect")
+      .attr("x", (d, i) => i * 80)
+      .attr("y", d => 200 - d)
+      .attr("width", 75)
+      .attr("height", d => d)
+      .attr("fill", "blue");
+  </script>
+  <script src="candlesticks.js" ></script>
+</body>
+</html>
