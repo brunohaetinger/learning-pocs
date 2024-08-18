@@ -1,0 +1,9 @@
+langchain
+langchain-openai
+langchain_community
+beautifulsoup4
+faiss-cpu
+langchainhub
+langserve
+fastapi
+langsmith
