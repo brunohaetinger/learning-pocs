@@ -3,7 +3,7 @@ langchain-openai
 langchain_community
 beautifulsoup4
 faiss-cpu
-langchainhub
+# langchainhub
 langserve
 fastapi
 langsmith
