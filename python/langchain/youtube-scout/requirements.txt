@@ -1,0 +1,10 @@
+langchain
+langchain-openai
+langchain_community
+youtube_search
+# beautifulsoup4
+# faiss-cpu
+# # langchainhub
+# langserve
+# fastapi
+# langsmith
