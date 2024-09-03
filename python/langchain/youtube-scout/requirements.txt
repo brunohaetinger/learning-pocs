@@ -2,6 +2,7 @@ langchain
 langchain-openai
 langchain_community
 youtube_search
+youtube-transcript-api
 # beautifulsoup4
 # faiss-cpu
 # # langchainhub
