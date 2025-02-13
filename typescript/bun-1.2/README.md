@@ -17,7 +17,10 @@ This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) i
 # Test Bun 1.2v
 
 - [ ] bun.sql
-- [ ] JS Bundler
+- [x] JS Bundler
+- [x] Compile: 
+    - `bun build ./index.ts --compile --outfile helloBun`
+    - Execute: `./helloBun`
 - [ ] Bun CSS Parser
 - [ ] Bun UDP
 - [ ] bun.build
