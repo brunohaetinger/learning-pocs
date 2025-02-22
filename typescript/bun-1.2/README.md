@@ -21,6 +21,6 @@ This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) i
 - [x] Compile: 
     - `bun build ./index.ts --compile --outfile helloBun`
     - Execute: `./helloBun`
-- [ ] Bun CSS Parser
+- [x] Bun CSS Parser
 - [ ] Bun UDP
-- [ ] bun.build
+- [x] bun.build
