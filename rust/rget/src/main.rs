@@ -1,8 +1,15 @@
 extern crate clap;
+extern crate reqwest; // Add reqwest for HTTP requests
+extern crate indicatif; // Ensure indicatif is included for progress bars
+extern crate human_bytes; // For human-readable byte sizes
 
 use clap::{Arg, App};
-
-use indicatif::{ProgressBar, ProgressStyle}; // Add this line to import ProgressBar and ProgressStyle
+use indicatif::{ProgressBar, ProgressStyle};
+use reqwest::blocking::Client;
+use reqwest::header::{CONTENT_LENGTH as ContentLength, CONTENT_TYPE as ContentType};
+use human_bytes::human_bytes; // Correct import for human_bytes function
+use std::fs::File;
+use std::io::{self, Write, Read};
 
 fn main() {
     let matches = App::new("Rget")
@@ -20,7 +27,7 @@ fn main() {
     println!("{}", url);
 }
 
-fn create_progres_bar(quiet_mode: bool, msg: &str, length: Option<u64>) -> ProgressBar {
+fn create_progress_bar(quiet_mode: bool, msg: &str, length: Option<u64>) -> ProgressBar {
     let bar = match quiet_mode {
         true => ProgressBar::hidden(),
         false => {
@@ -43,41 +50,48 @@ fn create_progres_bar(quiet_mode: bool, msg: &str, length: Option<u64>) -> Progr
     bar
 }
 
-fn download(target: &str, quiet_mode: bool) -> Result<(), Box<::std::error::Error>> {
+fn parse_url(target: &str) -> Result<String, Box<dyn std::error::Error>> {
+    // Simple URL validation can be added here
+    Ok(target.to_string())
+}
 
+fn print(message: String, quiet_mode: bool) {
+    if !quiet_mode {
+        println!("{}", message);
+    }
+}
+
+fn save_to_file(buf: &mut Vec<u8>, fname: &str) -> Result<(), io::Error> {
+    let mut file = File::create(fname)?;
+    file.write_all(buf)?;
+    Ok(())
+}
+
+fn download(target: &str, quiet_mode: bool) -> Result<(), Box<dyn std::error::Error>> {
     // parse url
     let url = parse_url(target)?;
-    let client = Client::new().unwrap();
-    let mut resp = client.get(url)?
-        .send()
-        .unwrap();
-    print(format!("HTTP request sent... {}",
-                  style(format!("{}", resp.status())).green()),
-          quiet_mode);
+    let client = Client::new();
+    let request_builder = client.get(&url);
+    let resp = request_builder.send()?; // Correct usage of send()
+    print(format!("HTTP request sent... {}", resp.status()), quiet_mode);
+    
     if resp.status().is_success() {
-
         let headers = resp.headers().clone();
         let ct_len = headers.get::<ContentLength>().map(|ct_len| **ct_len);
-
         let ct_type = headers.get::<ContentType>().unwrap();
 
         match ct_len {
             Some(len) => {
-                print(format!("Length: {} ({})",
-                      style(len).green(),
-                      style(format!("{}", HumanBytes(len))).red()),
-                    quiet_mode);
+                print(format!("Length: {} ({})", len, human_bytes(len)), quiet_mode);
             },
             None => {
-                print(format!("Length: {}", style("unknown").red()), quiet_mode); 
+                print(format!("Length: {}", "unknown"), quiet_mode); 
             },
         }
 
-        print(format!("Type: {}", style(ct_type).green()), quiet_mode);
-
+        print(format!("Type: {}", ct_type.to_string()), quiet_mode);
         let fname = target.split("/").last().unwrap();
-
-        print(format!("Saving to: {}", style(fname).green()), quiet_mode);
+        print(format!("Saving to: {}", fname), quiet_mode);
 
         let chunk_size = match ct_len {
             Some(x) => x as usize / 99,
@@ -85,18 +99,14 @@ fn download(target: &str, quiet_mode: bool) -> Result<(), Box<::std::error::Erro
         };
 
         let mut buf = Vec::new();
-
         let bar = create_progress_bar(quiet_mode, fname, ct_len);
 
         loop {
             let mut buffer = vec![0; chunk_size];
-            let bcount = resp.read(&mut buffer[..]).unwrap();
+            let bcount = resp.read(&mut buffer[..])?;
             buffer.truncate(bcount);
             if !buffer.is_empty() {
-                buf.extend(buffer.into_boxed_slice()
-                               .into_vec()
-                               .iter()
-                               .cloned());
+                buf.extend(buffer);
                 bar.inc(bcount as u64);
             } else {
                 break;
@@ -104,10 +114,8 @@ fn download(target: &str, quiet_mode: bool) -> Result<(), Box<::std::error::Erro
         }
 
         bar.finish();
-
         save_to_file(&mut buf, fname)?;
     }
 
     Ok(())
-
 }
