@@ -28,7 +28,7 @@ pub fn main() !void {
     const a: i32 = 100; // Signed 32-bit integer
     const b: u64 = 1000; // Unsigned 64-bit integer
     const c = 0xFF; // Hexadecimal notation
-    const d = 0b1010_1010; // Binary notation
+    const d = 0b0000_1010; // Binary notation
     std.debug.print("\nIntegers: a={}, b={}, c={}, d={}\n", .{ a, b, c, d });
 
     // -- Floating-Point Numbers
@@ -99,4 +99,12 @@ pub fn main() !void {
     ptr.* += 1;
     std.debug.print("After ptr.* + 1 --- x={}, ptr={}, ptr.*={}.\n", .{ x, ptr, ptr.* });
     // ptr.* → Dereferencing.
+
+    // -- Split a string by space ' '
+    const text = "hello zig world";
+    var tokenizer = std.mem.tokenizeAny(u8, text, " "); // delimiter is " "
+
+    while (tokenizer.next()) |token| {
+        std.debug.print("Token: {s}\n", .{token});
+    }
 }
