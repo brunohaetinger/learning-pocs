@@ -10,3 +10,10 @@ The output contains this format as example:
 ```
 
 Where there are the file name, idented with findings inside the file, on each line is each finding with the line number and the line text.
+
+
+## Build binary
+
+- Build with: `zig build-exe src/main.zig`
+- Run output: `./main`
+- Run for specific platform: `zig build-exe -target x86_64-linux src/main.zig`
