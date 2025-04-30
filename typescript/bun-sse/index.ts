@@ -2,7 +2,7 @@ import { serve } from "bun";
 
 serve({
   port: 3000,
-  fetch(req) {
+  async fetch(req) {
     const url = new URL(req.url);
 
       if (url.pathname === "/events") {
@@ -13,7 +13,8 @@ serve({
 
             // Send a message every 2 seconds
             const interval = setInterval(() => {
-              controller.enqueue(`data: Server Time: ${new Date().toLocaleTimeString()}\n\n`);
+              // Use call to ensure 'this' is correct
+              controller.enqueue.call(controller, `data: Server Time: ${new Date().toLocaleTimeString()}\n\n`);
             }, 2000);
 
             // Cleanup function
@@ -34,25 +35,8 @@ serve({
     }
 
     // Serve a basic HTML page
-    return new Response(`
-      <!DOCTYPE html>
-      <html lang="en">
-      <body>
-        <h1>Server-Sent Events Demo</h1>
-        <ul id="messages"></ul>
-
-        <script>
-          const evtSource = new EventSource("/events");
-
-          evtSource.onmessage = function(event) {
-            const li = document.createElement("li");
-            li.textContent = event.data;
-            document.getElementById("messages").appendChild(li);
-          };
-        </script>
-      </body>
-      </html>
-    `, {
+    const html = await Bun.file("index.html").text();
+    return new Response(html, {
       headers: { "Content-Type": "text/html" }
     });
   },

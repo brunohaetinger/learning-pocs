@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <h1>Server-Sent Events Demo</h1>
+  <ul id="messages"></ul>
+
+  <script>
+    const evtSource = new EventSource("/events");
+
+    evtSource.onmessage = function(event) {
+      const li = document.createElement("li");
+      li.textContent = event.data;
+      document.getElementById("messages").appendChild(li);
+    };
+  </script>
+</body>
+</html>
