@@ -1,6 +1,5 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import ToDoList from './components/ToDoList.vue'
+// No need to import components directly as they will be loaded by the router
 </script>
 
 <template>
@@ -12,8 +11,13 @@ import ToDoList from './components/ToDoList.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="Vite + Vue" />
-  <ToDoList />
+  
+  <div class="navigation">
+    <router-link to="/">Home</router-link> | 
+    <router-link to="/todo">Todo List</router-link>
+  </div>
+  
+  <router-view />
 </template>
 
 <style scoped>
