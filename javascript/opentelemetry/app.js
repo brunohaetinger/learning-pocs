@@ -30,7 +30,7 @@ const activeRequests = meter.createUpDownCounter('active_requests', {
 
 // Create Express app
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // Middleware to track metrics
 app.use((req, res, next) => {
