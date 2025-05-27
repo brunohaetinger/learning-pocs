@@ -6,8 +6,8 @@ load_dotenv()
 
 async def main():
     agent = Agent(
-        task="Compare the price of gpt-4o and DeepSeek-V3",
-        llm=ChatOpenAI(model="gpt-4o"),
+        task="on the webiste statusinvest.com.br, search for the stock itsa4 and make a report showing the pros and cons from the company indicators, balance sheets, profits, etc.",
+        llm=ChatOpenAI(model="gpt-4o-mini"),
     )
     await agent.run()
 
