@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trello-like Drag & Drop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="board">
+        <div class="column" id="column-1">
+            <h2>To Do</h2>
+            <div class="cards">
+                <div class="card" id="card-1" draggable="true">
+                    <h3>Task 1</h3>
+                    <p>Plan project outline</p>
+                </div>
+                <div class="card" id="card-2" draggable="true">
+                    <h3>Task 2</h3>
+                    <p>Set up development environment</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column" id="column-2">
+            <h2>In Progress</h2>
+            <div class="cards">
+                <div class="card" id="card-3" draggable="true">
+                    <h3>Task 3</h3>
+                    <p>Implement user authentication</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column" id="column-3">
+            <h2>Done</h2>
+            <div class="cards">
+                <div class="card" id="card-4" draggable="true">
+                    <h3>Task 4</h3>
+                    <p>Initial project setup</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
