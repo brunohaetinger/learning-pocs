@@ -4,8 +4,15 @@ from datetime import datetime
 class ToDoManager():
 
     def __init__(self):
+        print("Starting ToDoManager...")
+
+    def __enter__(self):
         self.con = sqlite3.connect("to-do.db")
-        self.createTable()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.con.commit();
+        self.con.close()
 
     def createTable(self):
         cur = self.con.cursor()
@@ -32,14 +39,12 @@ class ToDoManager():
         res = cur.execute("SELECT * from todo;")
         print(f"{res.fetchall()}")
 
-    def close(self):
-        self.con.close()
+
 # ---
 
-todoManager = ToDoManager()
-todoManager.printAll()
-todoManager.createNewItem("Do Groceries")
-todoManager.printAll()
-todoManager.close()
+with ToDoManager() as todoManager:
+    todoManager.printAll()
+    todoManager.createNewItem("Do Groceries")
+    todoManager.printAll()
 
 
