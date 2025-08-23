@@ -24,6 +24,7 @@ class ToDoManager():
         cur = self.con.cursor()
         now = datetime.now()
         res = cur.execute("INSERT INTO todo (title, completed, created_at) values(?, False, ?);", (title, now.strftime("%Y-%m-%d %H:%M:%S")))
+        self.con.commit()
         print(f"{res.fetchone()}")
     
     def printAll(self):
@@ -31,10 +32,14 @@ class ToDoManager():
         res = cur.execute("SELECT * from todo;")
         print(f"{res.fetchall()}")
 
+    def close(self):
+        self.con.close()
+# ---
+
 todoManager = ToDoManager()
 todoManager.printAll()
 todoManager.createNewItem("Do Groceries")
 todoManager.printAll()
-
+todoManager.close()
 
 
