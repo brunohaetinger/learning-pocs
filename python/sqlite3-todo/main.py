@@ -1,10 +1,40 @@
 import sqlite3
+from datetime import datetime
 
-con = sqlite3.connect("to-do.db")
-cur = con.cursor()
+class ToDoManager():
 
-cur.execute("CREATE TABLE todo(title, complete, created_at)")
+    def __init__(self):
+        self.con = sqlite3.connect("to-do.db")
+        self.createTable()
 
-res = cur.execute("SELECT name from sqlite_master ")
-res.fetchone()
+    def createTable(self):
+        cur = self.con.cursor()
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS todo(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT, 
+                completed BOOLEAN, 
+                created_at TEXT
+            )
+        """
+        )
+
+
+    def createNewItem(self, title):
+        cur = self.con.cursor()
+        now = datetime.now()
+        res = cur.execute("INSERT INTO todo (title, completed, created_at) values(?, False, ?);", (title, now.strftime("%Y-%m-%d %H:%M:%S")))
+        print(f"{res.fetchone()}")
+    
+    def printAll(self):
+        cur = self.con.cursor()
+        res = cur.execute("SELECT * from todo;")
+        print(f"{res.fetchall()}")
+
+todoManager = ToDoManager()
+todoManager.printAll()
+todoManager.createNewItem("Do Groceries")
+todoManager.printAll()
+
+
 
