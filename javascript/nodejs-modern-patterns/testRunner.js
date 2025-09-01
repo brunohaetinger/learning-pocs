@@ -17,3 +17,15 @@ describe('Math functions', () => {
     assert.throws(() => add('a', 'b'), /Invalid input/);
   });
 });
+
+/*
+ * Usage
+ * # Run all tests with built-in runner
+node --test
+
+# Watch mode for development
+node --test --watch
+
+# Coverage reporting (Node.js 20+)
+node --test --experimental-test-coverage
+ * */
