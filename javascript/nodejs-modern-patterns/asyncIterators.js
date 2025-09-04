@@ -6,7 +6,7 @@ class DataProcessor extends EventEmitter {
       this.emit('data', `chunk-${i}`);
       yield `processed-${i}`;
       // Simulate async processing time
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
     this.emit('end');
   }
@@ -14,6 +14,7 @@ class DataProcessor extends EventEmitter {
 
 // Consume events as an async iterator
 const processor = new DataProcessor();
+processor.on('data', (msg)=> console.log(`Data from emitted event is: ${msg}`))
 for await (const result of processor.processStream()) {
   console.log('Processed:', result);
 }
