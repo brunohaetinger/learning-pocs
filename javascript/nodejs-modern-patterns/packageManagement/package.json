@@ -1,0 +1,16 @@
+{
+  "name": "modern-node-app",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "imports": {
+    "#config": "./src/config/index.js",
+    "#utils/*": "./src/utils/*.js",
+    "#db": "./src/database/connection.js"
+  }
+}
+
