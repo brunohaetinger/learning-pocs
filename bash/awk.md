@@ -14,3 +14,8 @@ Consider using `./example_data.csv`:
 `-F` => Define separators on data fields
 `-v` => Set a variable to be used n the script
 `-f` => Use a file as the source of the awk program
+
+
+
+- `-v` example:
+> awk -F"," -v var="Amount:" '{print var, $3}' example_data.csv
