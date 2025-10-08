@@ -19,3 +19,7 @@ Consider using `./example_data.csv`:
 
 - `-v` example:
 > awk -F"," -v var="Amount:" '{print var, $3}' example_data.csv
+
+
+- Data manipulation:
+  - Sum: `awk -F"," '{sum += $3} END {print sum}' example_data.csv`
