@@ -11,4 +11,8 @@ Used to remove sections from each line of files. Useful tool for extracting spec
 ## Usages
 
 > cut -d',' -f1 data/example_data.csv
+> cut -d',' -f1-2 data/example_data.csv
+> cut --complement -d',' -f1-2 data/example_data.csv
+
 > cut -d' ' -f2 data/example_text.txt
+
