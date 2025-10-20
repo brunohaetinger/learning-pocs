@@ -16,3 +16,12 @@ Used to display Linux tasks. Monitor system performance in real-time
 - %MEM: Memory usage percentage
 - TIME+: Total CPU time the process has used since it started
 - COMMAND: The command that started the process
+
+
+## Options
+
+- `-d`: Set the time between updates
+- `-p`: Monitor specific PIDs
+- `-u`: Show tasks for a specific user
+- `-n`: Set the number of iterations
+- `-b`: Batch mode operation
