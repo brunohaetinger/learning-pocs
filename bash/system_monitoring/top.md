@@ -23,5 +23,17 @@ Used to display Linux tasks. Monitor system performance in real-time
 - `-d`: Set the time between updates
 - `-p`: Monitor specific PIDs
 - `-u`: Show tasks for a specific user
-- `-n`: Set the number of iterations
-- `-b`: Batch mode operation
+- `-n`: Set the number of iterations before command exits
+- `-b`: Batch mode operation, suitable for sending output to other programs or files
+
+
+## Usages
+
+Setting time between updates:
+`top -d 5`
+
+Defining specific PID:
+`top -p 1234`
+
+Looking for user specific process:
+`top -u username`
