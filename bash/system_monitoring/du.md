@@ -15,3 +15,9 @@ Used to estimate file space usage;
 - `-a` => Show sizes for all files, not just directories
 - `-c` => Produce a grand to total
 - `--max-depth=N` => Limit the depth of directory traversal
+
+
+## Usages
+
+1. Disk usage, in human-readable format, summing total and max depth of 2:
+`du -hc --max-depth=2 ~/Downloads`
