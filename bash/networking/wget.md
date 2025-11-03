@@ -35,3 +35,10 @@ Continue getting a Partially downloaded file
 
 Limit download speed
 `wget --limit-rate=200k http://example.com/largefile.zip`
+
+## Output
+
+- **Download Progress**: shows the progress of the download
+- **File size**: the size of the file being downloaded
+- **Download Speed**: The speeed at which the file is being downloaded
+- **Time Remaining**: estimated time remaining for the download to complete
