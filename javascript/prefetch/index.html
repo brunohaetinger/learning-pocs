@@ -1,0 +1,30 @@
+<!-- mark links you want to prefetch -->
+<a id="page2" href="./page2.html" data-prefetch>Go to page 2</a>
+<!-- <link rel="prerender" href="./page2.html" /> -->
+
+<script>
+
+  async function prefetchToCache(url) {
+    try {
+      // skip for low-data users
+      const conn = navigator.connection || {};
+      if (conn.saveData || (conn.effectiveType && /2g|slow-2g/.test(conn.effectiveType))) return;
+
+      // fetch (no-cors may return opaque responses for cross-origin)
+      const resp = await fetch(url, { credentials: 'omit', mode: 'same-origin' });
+      if (!resp.ok) return;
+
+      const cache = await caches.open('prefetch-v1');
+      await cache.put(url, resp.clone());
+      console.log('Prefetched into cache:', url);
+    } catch (err) {
+      console.warn('prefetch failed', err);
+    }
+  }
+
+  const page2Link = document.getElementById("page2");
+  page2Link.addEventListener("mouseover", () => {
+    prefetchToCache("http://localhost:8080/page2.html");
+  })
+</script>
+
