@@ -9,3 +9,8 @@ Syntax:
 
 - `-R` => Change files and directories recursively
 - `-v` => Output a diagnostic for every file processed
+
+## Usage
+
+Change permissions for files and directories recursively:
+> chmod -R 755 /path/to/directory
