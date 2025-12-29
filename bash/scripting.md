@@ -15,4 +15,10 @@ name="World"
 echo "Hello, $name!"
 ```
 
+## Environment Variables
+
+Are accessible by just using them:
+> echo "Your PATH is $PATH"
+
+
 
