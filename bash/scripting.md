@@ -21,4 +21,16 @@ Are accessible by just using them:
 > echo "Your PATH is $PATH"
 
 
+## Local variables
+
+Are available within the block of code in which they are defined, such as within a function.
+```bash
+my_function() {
+  local local_var="I am local"
+  echo $local_var
+}
+my_function
+```
+
+
 
