@@ -33,4 +33,6 @@ my_function
 ```
 
 
+## Data types
 
+There are Strings, Numbers, Arrays, Associative Arrays.
