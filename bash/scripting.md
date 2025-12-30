@@ -36,3 +36,27 @@ my_function
 ## Data types
 
 There are Strings, Numbers, Arrays, Associative Arrays.
+
+Arrays:
+```bash
+fruits=("Apple" "Banana" "Cherry")
+for fruit in "${fruits[@]}"; do
+  echo $fruit
+done
+
+
+Associative Arrays, are similar to dictionaries in other languages, letting you add or remove keys and values, having named keys to access values.
+```bash
+declare -A colors
+colors[apple]="red"
+colors[banana]="yellow"
+colors[grape]="purple"
+unset colors[banana]
+echo ${colors[apple]} # red
+echo ${colors[grape]} # purple
+
+Data Type limitations:
+Bash does not support floating-point arithmetic natively. For such operations, consider using external tools like `bc` or `awk`
+
+```
+```
