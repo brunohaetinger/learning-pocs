@@ -54,9 +54,18 @@ colors[grape]="purple"
 unset colors[banana]
 echo ${colors[apple]} # red
 echo ${colors[grape]} # purple
+```
 
 Data Type limitations:
 Bash does not support floating-point arithmetic natively. For such operations, consider using external tools like `bc` or `awk`
 
-```
-```
+## Operators
+
+Comparison:
+- `-eq`: Equal to
+- `-ne`: Not Equal to
+- `-lt`: Less than
+- `-le`: Less than or equal to
+- `-gt`: Greater than 
+- `-ge`: Greater or Equal to
+
