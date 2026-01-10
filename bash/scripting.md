@@ -79,3 +79,16 @@ File tests:
 - `-d`: check if a directory exists
 - `-f`: Check if a file is a regular file
 - `-s`: checks if a file is not empty
+
+```bash
+FILE_PATH="/path/to/file.txt"
+
+if [ -f "$FILE_PATH"]; then
+  echo "The file $FILE_PATH exists and is a regular file."
+elif [ -d "$FILE_PATH"]; then
+  echo "The path $FILE_PATH is a directory"
+else
+  echo "The file $FILE_PATH does not exist or is not a regular file/directory."
+fi
+
+```
