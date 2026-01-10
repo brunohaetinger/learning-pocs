@@ -92,3 +92,15 @@ else
 fi
 
 ```
+
+## If...Else Statements
+
+The condition is enclosed in square brackets.
+
+Example
+```bash
+num=15
+if [ $num -gt 10 ]; then
+  echo "Number is greater than 10"
+fi
+```
