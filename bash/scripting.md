@@ -69,3 +69,7 @@ Comparison:
 - `-gt`: Greater than 
 - `-ge`: Greater or Equal to
 
+Logical:
+- `&&`: AND
+- `||`: OR
+- `!`: NOT
