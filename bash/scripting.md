@@ -73,3 +73,9 @@ Logical:
 - `&&`: AND
 - `||`: OR
 - `!`: NOT
+
+File tests:
+- `-e`: Checks if a file exists
+- `-d`: check if a directory exists
+- `-f`: Check if a file is a regular file
+- `-s`: checks if a file is not empty
