@@ -18,6 +18,9 @@ function openDB() {
       const store = db.createObjectStore(STORE_NAME, {
         keyPath: "createdAt"
       })
+
+      // Create indexes
+      store.createIndex("createdAt", "createdAt")
     }
   })
 }
