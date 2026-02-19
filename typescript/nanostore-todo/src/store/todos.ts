@@ -1,8 +1,8 @@
 // store/users.ts
 import { atom } from 'nanostores'
 
-export const $todos = atom<ToDo[]>([])
+export const $todos = atom<string[]>([])
 
-export function addUser(todo: ToDo) {
+export function addToDo(todo: string) {
   $todos.set([...$todos.get(), todo]);
 }
