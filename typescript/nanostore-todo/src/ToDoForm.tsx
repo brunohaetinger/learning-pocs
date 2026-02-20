@@ -7,7 +7,12 @@ export const ToDoForm = () => {
 
   return (
     <div>
-      <input value={title} placeholder='To Do title here...' onChange={(ev) => setTitle(ev.target.value)} onKeyDown={(ev) => ev.key === 'Enter' && addToDo(title)} />
+      <input
+        value={title}
+        placeholder='To Do title here...'
+        onChange={(ev) => setTitle(ev.target.value)}
+        onKeyDown={(ev) => ev.key === 'Enter' && addToDo(title)}
+      />
     </div>
   )
 }
