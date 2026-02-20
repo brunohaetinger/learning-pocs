@@ -1,10 +1,8 @@
 // components/admins.tsx
-import { useStore } from '@nanostores/react'
-import { $todos, addToDo } from '../src/store/todos.ts'
+import { addToDo } from '../src/store/todos.ts'
 import { useState } from 'react';
 
 export const ToDoForm = () => {
-  const todos = useStore($todos);
   const [title, setTitle] = useState("");
 
   return (
