@@ -15,6 +15,15 @@ const app = new Elysia()
       return status(200, todos)
     }
   )
+  .post(
+    "/todo",
+    ({ status }) => {
+      // get title
+      const newItem: ToDo = { title, completed: false };
+      todos.push(newItem)
+      return status(201, todos)
+    }
+  )
 
   .listen(3000);
 
