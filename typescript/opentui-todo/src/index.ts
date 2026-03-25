@@ -2,6 +2,7 @@ import {
   ASCIIFont,
   Box,
   createCliRenderer,
+  Input,
   Text,
   TextAttributes,
 } from "@opentui/core";
@@ -15,6 +16,10 @@ renderer.root.add(
       { justifyContent: "center", alignItems: "flex-end" },
       ASCIIFont({ font: "tiny", text: "OpenTUI" }),
       Text({ content: "New item:", attributes: TextAttributes.DIM }),
+      Input({
+        placeholder: "New to-do item title",
+        width: 50,
+      })
     ),
   ),
 );
