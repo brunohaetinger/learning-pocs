@@ -6,33 +6,40 @@ import {
   InputRenderableEvents,
   Text,
   TextAttributes,
+  instantiate,
 } from "@opentui/core";
+import { appendFileSync } from "fs";
+
+
+function log(...args: any[]) {
+  appendFileSync("debug.log", args.join(" ") + "\n");
+}
 
 const renderer = await createCliRenderer({ exitOnCtrlC: true });
 const todos: string[] = [];
-const titleInput = Input({
+const titleInput = instantiate(renderer.root.ctx, Input({
   placeholder: "New to-do item title",
   width: 50,
-});
+})) as any;
 
-const todosContainer = Box({ flexDirection: "column" });
+const todosContainer = instantiate(renderer.root.ctx, Box({ flexDirection: "column", alignItems: "flex-start" }));
 
 titleInput.focus();
 
-const renderTodos = () => {
-  todosContainer.forEach(node => {
-    todosContainer.remove(node.id);
-  });
+todosContainer.add(
+  Text({ content: "STATIC TEST", attributes: TextAttributes.BOLD })
+);
 
-  const todoNodes = todos.map(t => (Text({ content: t, attributes: TextAttributes.DIM })))
-
-  todoNodes.forEach(node => todosContainer.add(node));
-}
 
 titleInput.on(InputRenderableEvents.ENTER, (value: string) => {
-  todos.push(value);
+  log('ENTER - value:', JSON.stringify(value), 'children before:', todosContainer.getChildrenCount());
+  
+  const newText = Text({ content: value || "STATIC TEST", attributes: TextAttributes.BOLD });
+  todosContainer.add(newText);
+  
+  log('children after:', todosContainer.getChildrenCount());
+  
   titleInput.value = "";
-  renderTodos();
 })
 
 
@@ -42,12 +49,14 @@ renderer.root.add(
   Box(
     { alignItems: "center", justifyContent: "center", flexGrow: 1 },
     Box(
-      { justifyContent: "center", alignItems: "flex-end" },
-      ASCIIFont({ font: "tiny", text: "OpenTUI" }),
-      Text({ content: "Items:", attributes: TextAttributes.BOLD }),
-      todosContainer,
-      Text({ content: "New item:", attributes: TextAttributes.BOLD }),
-      titleInput,
-    ),
+      { flexDirection: "column" },
+      [
+        ASCIIFont({ font: "tiny", text: "OpenTUI" }),
+        Text({ content: "Items:", attributes: TextAttributes.BOLD }),
+        todosContainer,
+        Text({ content: "New item:", attributes: TextAttributes.BOLD }),
+        titleInput,
+      ]
+    )
   ),
 );
